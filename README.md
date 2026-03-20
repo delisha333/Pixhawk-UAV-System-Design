@@ -90,7 +90,7 @@ This loop runs continuously, which keeps the drone stable.
 - [My Understanding](docs/my_understanding.md)
 - [Pixhawk Workflow](docs/pixhawk_workflow.md)
 - [Mission Planner Usage](docs/mission_planner_usage.md)
-- [Problems Faced](docs/problems_faced.md)
+
 
 ---
 
