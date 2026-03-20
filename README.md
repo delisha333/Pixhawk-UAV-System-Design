@@ -1,51 +1,95 @@
-# 🚁 End-to-End UAV System using Pixhawk
+# 🚁 UAV Drone using Pixhawk
 
-## 📌 Abstract
-This project presents a complete UAV system design including embedded firmware, control algorithms, and hardware interfacing using Pixhawk.
+## What this project is about
+This project is my attempt to understand how a drone actually stabilizes itself in air using a Pixhawk flight controller.
 
-## 🎯 Objectives
-- Design stable flight system
-- Implement PWM-based ESC control
-- Integrate IMU + GPS
-- Develop basic control algorithms
+Instead of just assembling components, I focused on understanding the complete flow — from sensing orientation to correcting it using motors.
 
-## 🧠 System Understanding
-The UAV system consists of:
-- Flight Controller (Pixhawk)
-- Sensor Suite (IMU, GPS)
-- Actuators (BLDC + ESC)
-- Control Loop (PID)
+---
 
-## ⚙️ Working Principle
-1. Sensors collect orientation data
-2. Controller processes error
-3. PWM signals adjust motor speed
-4. Drone stabilizes
+## How I understand a drone now
 
-## 🧮 Control System (Important)
-PID Control used:
+A drone is basically a feedback system that keeps correcting itself continuously.
 
-Error = Setpoint - Actual
+The working can be broken into 3 parts:
 
-Output = Kp*e + Ki∫e + Kd(de/dt)
+### 1. Sensing
+The drone uses an IMU (accelerometer + gyroscope) to detect its orientation.
 
-## 🔌 Hardware Architecture
-(Add diagram)
+- Accelerometer → tells tilt  
+- Gyroscope → tells rotation  
 
-## 💻 Firmware Modules
-- PWM Driver
-- Sensor Interface
-- Control Logic
-- Navigation Logic
+So at any moment, the drone knows if it is tilting or rotating.
 
-## 📊 Results
-- Stable hover achieved
-- Response time improved
+---
 
-## 🚀 Future Scope
-- AI navigation
-- Vision-based tracking
-- Autonomous landing
+### 2. Processing (Pixhawk)
+Pixhawk acts as the brain.
 
-## 👩‍💻 Author
+- It reads sensor data  
+- Compares it with the desired position (stable / level)  
+- Calculates the error  
+
+Example:
+If the drone tilts to the right, Pixhawk detects that deviation.
+
+---
+
+### 3. Actuation (Motors + ESC)
+Based on the error, Pixhawk sends PWM signals to ESCs.
+
+- ESC controls motor speed  
+- Motor speed changes thrust  
+
+Example:
+If the drone tilts right → left motors speed up → drone balances
+
+---
+
+## Complete Loop
+
+Sensor → Pixhawk → Motor → Correction → Sensor again
+
+This loop runs continuously, which keeps the drone stable.
+
+---
+
+## What I worked on in this project
+- Understanding Pixhawk connections and working  
+- Studying how PWM controls ESC and motor speed  
+- Basic IMU data interpretation  
+- Exploring control logic (PID concept)  
+- System-level understanding of drone stabilization  
+
+---
+
+## Challenges I faced
+- Initially, I couldn’t connect how sensors affect motor output  
+- PWM and ESC working was confusing at first  
+- Understanding how fast corrections happen in real time  
+
+---
+
+## What I learned
+- A drone is not just hardware — it is a control system  
+- Stability comes from continuous feedback and correction  
+- Even small errors are corrected instantly using motor speed changes  
+
+---
+
+## Future improvements
+- Add obstacle avoidance  
+- Improve control tuning  
+- Explore autonomous navigation  
+
+---
+
+## Project Structure
+- `firmware/` → basic control and logic code  
+- `hardware/` → circuit and design files  
+- `docs/` → explanations and notes  
+
+---
+
+## Author
 Delisha Singh
